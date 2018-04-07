@@ -40,9 +40,34 @@ angular.module('Eggly', [
     $scope.isCreating = false;
     $scope.isEditing = false;
 
+    /** CRUD */
+
+    function resetCreateForm() {
+        $scope.newBookmark = {
+            name: '',
+            url: '',
+            category: $scope.currentCategory
+        }
+    }
+
+    function createBookmark(bookmark) { console.log('aqui');
+        if (bookmark) {
+            bookmark.id = $scope.bookmarks.length;
+            $scope.bookmars.push(bookmark);
+
+            resetCreateForm();
+        }
+    }
+
+    $scope.createBookmark = createBookmark();
+
+    /** Create and editing */
+
     function startCreating() {
         $scope.isCreating = true;
         $scope.isEditing = false;
+
+        resetCreateForm();
     }
 
     function cancelCreating() {
