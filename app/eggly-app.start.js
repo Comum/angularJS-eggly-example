@@ -46,20 +46,20 @@ angular.module('Eggly', [
         $scope.newBookmark = {
             name: '',
             url: '',
-            category: $scope.currentCategory
+            category: $scope.currentCategory.name
         }
     }
 
-    function createBookmark(bookmark) { console.log('aqui');
+    function createBookmark(bookmark) {
         if (bookmark) {
             bookmark.id = $scope.bookmarks.length;
-            $scope.bookmars.push(bookmark);
+            $scope.bookmarks.push(bookmark);
 
             resetCreateForm();
         }
     }
 
-    $scope.createBookmark = createBookmark();
+    $scope.createBookmark = createBookmark;
 
     /** Create and editing */
 
