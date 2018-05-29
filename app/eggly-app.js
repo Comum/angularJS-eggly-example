@@ -1,4 +1,7 @@
-angular.module('Eggly', [])
+angular.module('Eggly', [
+    'categories',
+    'categories.bookmarks'
+])
     .controller('MainCtrl', function($scope) {
         $scope.categories = [
             {"id": 0, "name": "Development"},
