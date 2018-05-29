@@ -23,7 +23,7 @@ angular.module('Eggly', [])
 
         function setCurrentCategory(category) {
             $scope.currentCategory = category;
-            
+
             cancelCreating();
             cancelEditing();
         }
@@ -51,6 +51,29 @@ angular.module('Eggly', [])
         }
 
         $scope.createBookmark = createBookmark;
+        $scope.editedBookmark = null;
+
+        function setEditedBookmark(bookmark) {
+            $scope.editedBookmark = angular.copy(bookmark);
+        }
+
+        function updateBookmark(bookmark) {
+            var index = _.findIndex($scope.bookmarks, function (b) {
+                return b.id === bookmark.id;
+            });
+
+            $scope.bookmarks[index] = bookmark;
+            $scope.editBookmark = null;
+            $scope.isEditing = false;
+        }
+
+        function isSelectedBookmark(bookmarkId) {
+            return $scope.editedBookmark !== null && $scope.editedBookmark.id === bookmarkId;
+        }
+
+        $scope.setEditedBookmark = setEditedBookmark;
+        $scope.updateBookmark = updateBookmark;
+        $scope.isSelectedBookmark = isSelectedBookmark;
 
         $scope.isCreating = false;
         $scope.isEditing = false;
@@ -73,6 +96,7 @@ angular.module('Eggly', [])
 
         function cancelEditing() {
             $scope.isEditing = false;
+            $scope.editedBookmark = null;
         }
 
         function shouldShowCreating() {
